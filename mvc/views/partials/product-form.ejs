@@ -1,0 +1,45 @@
+<div id="editForm">
+	<%if(locals.something && Object.keys(locals.something).length) { %>
+	    <form action="/sales/update-product/<%= something._id %>" method="post" autocomplete="off">
+	<% } else { %>
+	    <form action="/sales/create-product" method="post" autocomplete="off">
+	<% } %>
+	    
+	    <%
+	        if(locals.something && Object.keys(locals.something).length) {
+	            var pcode = something.productCode;
+	            var name = something.name;
+	            var unit = something.unitPrice;
+	            var retail = something.retailPrice;
+	            var pv = something.pv;
+	        }
+	    %>
+	    <div id="orderInput">
+			<div class="input-group">
+				<label>Product Code: </label>
+				<input id="productCode" type="text" required name="productCode" value="<%if(pcode) { %><%= pcode %><% } %>">
+			</div>
+			<div class="input-group">
+				<label for="name">Name: </label>
+				<input id="name" type="text" required name="name" value="<%if(name) { %><%= name %><% } %>">
+			</div>
+			<div class="input-group">
+				<label for="unitPrice">Unit Price: </label>
+				<input id="unitPrice" type="text" required name="unitPrice" value="<%if(unit) { %><%= unit %><% } %>">
+			</div>
+			<div class="input-group">
+				<label for="retailPrice">Retail Price</label>
+				<input id="retailPrice" type="text" required name="retailPrice" value="<%if(retail) { %><%= retail %><% } %>">
+			</div>
+			<div class="input-group">
+				<label for="pv">PV</label>
+				<input id="pv" type="text" required name="pv" value="<%if(pv) { %><%= pv %><% } %>">
+			</div>
+		</div>
+	    <% if(locals.something && Object.keys(locals.something).length) { %>
+	        <input class="submit" id="submitProduct" type="submit" name="submit" value="Update Product">
+	    <% } else { %>
+	        <input class="submit" id="submitProduct" type="submit" name="submit" value="Create Product">
+	    <% } %>	    
+	</form>
+</div>

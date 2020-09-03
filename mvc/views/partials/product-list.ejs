@@ -1,0 +1,36 @@
+<div id="list" data-simplebar>
+	<table>
+		<thead>
+			<tr>
+				<th> </th>
+				<th>Product Code</th>
+				<th>Name</th>
+				<th>Unit Price</th>
+				<th>Retail Price</th>
+				<th>PV</th>
+				<th> </th>
+			</tr>
+		</thead>
+		<tbody>
+			<% for(let i = 0; i < products.length; i++){%>
+				<tr>
+					<td>
+		                <form action="/sales/update-product/<%=products[i]._id%>" method="get">
+							<button><span class="writeIconSpan"><i class="fas fa-pen writeIcon"></i></span></button>
+		                </form>
+					</td>
+					<td><%= products[i].productCode%></td>
+					<td><%= products[i].name%></td>
+					<td><%= products[i].unitPrice%></td>
+					<td><%= products[i].retailPrice%></td>
+					<td><%= products[i].pv%></td>
+					<td>
+						<form action="/sales/delete-product/<%=products[i]._id%>" method="post">
+							<button><span class="deleteIconSpan"><i class="fas fa-trash deleteIcon"></i></span></button>
+		                </form>
+					</td>
+				</tr>
+			<% } %>
+		</tbody>
+	</table>
+</div>

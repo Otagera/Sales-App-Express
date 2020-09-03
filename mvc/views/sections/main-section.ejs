@@ -1,0 +1,14 @@
+<section id="main">
+	<header>
+		<h1>Sales</h1>
+		<h2>Management System</h2>
+	</header>
+	<section id="mainBody">
+
+    	<a href="javascript:history.back()" class="go-back"> <<<< Go Back </a>
+
+		<%if(checker != ""){%>
+			<%-include(`../partials/${checker}.ejs`);%>
+		<%}%>
+	</section> 
+</section>

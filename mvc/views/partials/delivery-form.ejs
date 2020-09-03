@@ -1,0 +1,105 @@
+<div id="editForm">
+	<% if(locals.delivery && Object.keys(locals.delivery).length) { %>
+	    <form action="/sales/update-delivery/<%= delivery._id %>" method="post" autocomplete="off">
+	<% } else { %>
+	    <form action="/sales/create-delivery" method="post" autocomplete="off">
+	<% } %>
+	    
+	    <%
+	        if(locals.delivery && Object.keys(locals.delivery).length) {
+	            var deliveryCode = delivery.deliveryCode;
+	            var date = delivery.date;
+	        }
+	    %>
+
+		<div id="orderInput">
+			<div class="input-group">
+				<label id="deliveryCodeLabel" for="deliveryCode">Delivery Code: </label>
+				<input id="deliveryCode" type="text" name="deliveryCode" value="<%if(deliveryCode) { %><%= deliveryCode %><% } %>">
+			</div>
+			<div class="input-group">
+				<label for="date">Customer Name: </label>
+				<input id="date" type="date" required name="date" value="<%if(date) { %><%= date.toISOString().substr(0, 10); %><% }else{ %><%- new Date().toISOString().substr(0, 10); %> <%} %>">
+			</div>
+					
+		</div>
+		<div id="orderProducts">
+			<p for="products">Products: </p></br>
+			<%if(date && products.length > 0) { %>
+				<span id="addProducts"><i class="fas fa-plus"></i></span>
+			<% } %>			
+			<div data-simplebar id="productList">
+				<table name= "table">
+					<thead>
+						<tr>
+							<th>Name</th>
+							<th>Price</th>
+							<th>PV</th>
+							<th>Quantity</th>
+						</tr>
+					</thead>
+					<tbody>
+						<% let sm ;
+							if(date) { %>
+								<% sm = delivery.products.length %>
+							<% }else{ %>
+								<% sm = products.length%>
+							<% } %>
+						<% for(let i = 0; i < sm; i++){%>
+							<tr class="productRow">
+								<td>
+									<label for="products"><%if(date) { %><%= delivery.products[i].product.name %><% }else{ %><%= products[i].name%> <% } %></label>
+									<input id="products" name="products" value="<%if(date) { %><%= delivery.products[i].product.name %><% }else{ %><%= products[i].name%> <% } %>" style="display: none;">
+								</td>
+								<td></td>
+								<td></td>
+								<td class="textDoubleCLick">
+									<input class="smallTableInput" type="" name="quantities" value="<%if(date) { %><%= delivery.products[i].quantity %><% }else{ %> <% } %>">
+								</td>
+							</tr>
+						<% } %>
+						
+					</tbody>
+				</table>
+			</div>
+		</div>
+		<div id="orderProductsNew">
+			<p for="products">Add New Products: </p></br>
+			<div data-simplebar id="productList">
+				<table name= "table">
+					<thead>
+						<tr>
+							<th>Name</th>
+							<th>Price</th>
+							<th>PV</th>
+							<th>Quantity</th>
+						</tr>
+					</thead>
+					<tbody>
+						
+						<% sm = products.length%>
+						<% for(let i = 0; i < sm; i++){%>
+							<tr class="productRow">
+								<td>
+									<label for="products"><%= products[i].name%></label>
+									<input id="products" name="newProducts" value="<%=products[i].name%>" style="display: none;">
+								</td>
+								<td></td>
+								<td></td>
+								<td class="textDoubleCLick">
+									<input class="smallTableInput" type="" name="newQuantities" value="">
+								</td>
+							</tr>
+						<% } %>
+						
+					</tbody>
+				</table>
+			</div>
+		</div>
+	    <% if(locals.delivery && Object.keys(locals.delivery).length) { %>
+	        <input class="submit" id="submitDelivery" type="submit" name="submit" value="Update Delivery">
+	    <% } else { %>
+	        <input class="submit" id="submitDelivery" type="submit" name="submit" value="Create Delivery">
+	    <% } %>
+	</form>
+</div>

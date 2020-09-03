@@ -1,0 +1,26 @@
+<div id="list" data-simplebar>
+	<table>
+		<thead>
+			<tr>
+				<th> </th>
+				<th>Product Name</th>
+				<th>Quantity</th>
+				<th> </th>
+			</tr>
+		</thead>
+		<tbody>
+			<% for(let i = 0; i < inventories.length; i++){%>
+				<tr>
+					<td>
+						<span class="writeIconSpan"><i class="fas fa-pen writeIcon"></i></span>
+					</td>
+					<td><%= inventories[i].product.name%></td>
+					<td><%= inventories[i].quantity%></td>
+					<td>
+						<span class="deleteIconSpan"><i class="fas fa-trash deleteIcon"></i></span>
+					</td>
+				</tr>
+			<% } %>
+		</tbody>
+	</table>
+</div>

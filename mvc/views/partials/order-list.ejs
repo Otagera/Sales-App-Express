@@ -1,0 +1,72 @@
+<%
+	function calculateTotalPrice(orderProducts){
+		let total = 0;
+		for(let i = 0; i < orderProducts.length; i++){
+			total = total + (orderProducts[i].quantity * orderProducts[i].product.unitPrice);
+		}
+		return total;
+	}
+	function calculateTotalPV(orderProducts){
+		let total = 0;
+		for(let i = 0; i < orderProducts.length; i++){
+			total = total + (orderProducts[i].quantity * orderProducts[i].product.pv);
+		}
+		return total;
+	}
+%>
+					<div id="list" data-simplebar>
+						<table>
+							<thead>
+								<tr>
+									<th>Index</th>
+									<th>Customer Name</th>
+									<th>Customer Code</th>
+									<th>Longrich Order Code</th>
+									<th>Comment</th>
+									<th>Mode of Payment</th>
+								</tr>
+							</thead>
+							<tbody>
+								<% for(let i = 0; i < orders.length; i++){%>
+									<tr class="clicker" data-id="<%=orders[i]._id%>">
+										<td>										
+							                <form action="/sales/update-order/<%=orders[i]._id%>" method="get">
+												<button>
+													<span class="writeIconSpan"><i class="fas fa-pen writeIcon"></i></span>
+												</button>
+							                </form>
+											<%=orders[i].index%>
+										</td>
+										<td><%=orders[i].customerName%></td>
+										<td><%=orders[i].customerCode%></td>
+										<td><%=orders[i].longrichOrderCode%></td>
+										<td><%=orders[i].coment%></td>
+										<td>
+											<form action="/sales/delete-order/<%=orders[i]._id%>" method="post">
+												<button>
+													<span class="deleteIconSpan"><i class="fas fa-trash deleteIcon"></i></span>
+												</button>
+							                </form>
+											<%=orders[i].modeOfPayment%>
+										</td>
+									</tr>
+									<tr class="orderProductsSub" data-id="<%=orders[i]._id%>">
+										<td colspan="6">
+											<p>Products</p>
+											<ul>
+												<%for(let j = 0; j < orders[i].products.length; j++){%>
+													<li>
+														<span><%=orders[i].products[j].product.name%>:</span>
+														<span><%=orders[i].products[j].quantity%></span>
+													</li>
+												<% } %>
+											</ul>
+											<p>Total Price: &#8358 <%-calculateTotalPrice(orders[i].products);%></p>
+											<p>Total PV: <%-calculateTotalPV(orders[i].products);%></p>
+										</td>
+									</tr>
+								<% } %>
+							</tbody>
+						</table>
+					</div>
+	

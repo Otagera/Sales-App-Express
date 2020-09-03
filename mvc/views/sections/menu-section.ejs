@@ -1,0 +1,23 @@
+	<aside id="menu-section">
+	<input type="checkbox" id="menu" checked="false">
+	<aside id="menu-controller">
+		<label for="menu" class="icon"></label>
+		<div id="menu-buttons">
+			
+			<a href="/sales/products"><button class="addBtns <% if(locals.active && active === 'products'){ %>activeBtn<% } %>">Product</button></a>
+
+			<a href="/sales/create-product"><button class="addBtns <% if(locals.active && active === 'newProduct'){ %>activeBtn<% } %>">Enter a New Product</button></a>
+
+			<a href="/sales/orders"><button class="addBtns <% if(locals.active && active === 'orders'){ %>activeBtn<% } %>">Order</button></a>
+
+			<a href="/sales/create-order"><button class="addBtns <% if(locals.active && active === 'newOrder'){ %>activeBtn<% } %>">Enter a New Order</button></a>
+
+			<a href="/sales/inventory"><button class="addBtns <% if(locals.active && active === 'inventories'){ %>activeBtn<% } %>">Inventory</button></a>
+
+			<a href="/sales/delivery"><button class="addBtns <% if(locals.active && active === 'deliveries'){ %>activeBtn<% } %>">Delivery</button></a>
+
+			<a href="/sales/create-delivery"><button class="addBtns <% if(locals.active && active === 'newDelivery'){ %>activeBtn<% } %>">Enter a New Delivery</button></a>
+
+		</div>
+	</aside>
+</aside>

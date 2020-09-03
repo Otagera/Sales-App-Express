@@ -1,0 +1,47 @@
+<div id="list" data-simplebar>
+	<table>
+		<thead>
+			<tr>
+				<th> </th>
+				<th>Delivery Code </th>
+				<th>Date</th>
+				<th> </th>
+			</tr>
+		</thead>
+		<tbody>
+			<% for(let i = 0; i < deliveries.length; i++){ //console.log(deliveries[i]);%>
+				<tr class="clicker" data-id="<%=deliveries[i]._id%>">
+					<td>
+						<form action="/sales/update-delivery/<%=deliveries[i]._id%>" method="get">
+							<button>
+								<span class="writeIconSpan"><i class="fas fa-pen writeIcon"></i></span>
+							</button>
+						</form>
+					</td>
+					<td><%= deliveries[i].deliveryCode%></td>
+					<td><%= deliveries[i].date%></td>
+					<td>
+						<form action="/sales/delete-delivery/<%=deliveries[i]._id%>" method="post">
+							<button>
+								<span class="deleteIconSpan"><i class="fas fa-trash deleteIcon"></i></span>
+							</button>
+						</form>
+					</td>
+				</tr>
+				<tr class="orderProductsSub" data-id="<%=deliveries[i]._id%>">
+					<td colspan="6">
+						<p>Products</p>
+						<ul>
+							<%for(let j = 0; j < deliveries[i].products.length; j++){%>
+								<li>
+									<span><%=deliveries[i].products[j].product.name%>:</span>
+									<span><%=deliveries[i].products[j].quantity%></span>
+								</li>
+							<% } %>
+						</ul>
+					</td>
+				</tr>
+			<% } %>
+		</tbody>
+	</table>
+</div>

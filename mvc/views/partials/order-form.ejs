@@ -1,0 +1,124 @@
+<div id="editForm">
+	<% if(locals.order && Object.keys(locals.order).length) { %>
+	    <form action="/sales/update-order/<%= order._id %>" method="post" autocomplete="off">
+	<% } else { %>
+	    <form action="/sales/create-order" method="post" autocomplete="off">
+	<% } %>
+	    
+	    <%
+	        if(locals.order && Object.keys(locals.order).length) {
+	            var index = order.index;
+	            var cName = order.customerName;
+	            var cCode = order.customerCode;
+	            var lOCode = order.longrichOrderCode;
+	            var coment = order.coment;
+	            var mOPayment = order.modeOfPayment;
+	        }
+	    %>
+
+		<div id="orderInput">
+			<div class="input-group">
+				<label id="indexLabel">Index: </label>
+				<input id="index" type="text" name="index" value="<%if(index) { %><%= index %><% } %>">
+			</div>
+			<div class="input-group">
+				<label for="customerName">Customer Name: </label>
+				<input id="customerName" type="text" required name="customerName" value="<%if(cName) { %><%= cName %><% } %>">
+			</div>
+			<div class="input-group">
+				<label for="customerCode">Customer Code: </label>
+				<input id="customerCode" type="text" required name="customerCode" value="<%if(cCode) { %><%= cCode %><% } %>">
+			</div>
+			<div class="input-group">
+				<label for="longrichOrderCode">Longrich Order Code</label>
+				<input id="longrichOrderCode" type="text" required name="longrichOrderCode" value="<%if(lOCode) { %><%= lOCode %><% } %>">
+			</div>
+			<div class="input-group">
+				<label for="coment">Comment</label>
+				<input id="coment" type="text" name="coment" value="<%if(coment) { %><%= coment %><% } %>">
+			</div>
+			<div class="input-group">
+				<label for="modeOfPayment">Mode Of Payment</label>
+				<input id="modeOfPayment" type="text" name="modeOfPayment" value="<%if(mOPayment) { %><%= mOPayment %><% } %>">
+			</div>			
+		</div>
+		<div id="orderProducts">
+			<p for="products">Products: </p></br>
+			<%if(cName && products.length > 0) { %>
+				<span id="addProducts"><i class="fas fa-plus"></i></span>
+			<% } %>			
+			<div data-simplebar id="productList">
+				<table name= "table">
+					<thead>
+						<tr>
+							<th>Name</th>
+							<th>Price(&#8358)</th>
+							<th>PV</th>
+							<th>Quantity</th>
+						</tr>
+					</thead>
+					<tbody>
+						<% let sm ;
+							if(cName) { %>
+								<% sm = order.products.length %>
+							<% }else{ %>
+								<% sm = products.length%>
+							<% } %>
+						<% for(let i = 0; i < sm; i++){%>
+							<tr class="productRow">
+								<td>
+									<label for="products"><%if(cName) { %><%= order.products[i].product.name %><% }else{ %><%= products[i].name%> <% } %></label>
+									<input id="products" name="products" value="<%if(cName) { %><%= order.products[i].product.name %><% }else{ %><%= products[i].name%> <% } %>" style="display: none;">
+								</td>
+								<td class=""><%if(cName) { %><%= order.products[i].product.unitPrice * order.products[i].quantity %><% }else{ %> <% } %></td>
+								<td class=""><%if(cName) { %><%= order.products[i].product.pv * order.products[i].quantity %><% }else{ %> <% } %></td>
+								<td class="textDoubleCLick">
+									<input class="smallTableInput" type="" name="quantities" value="<%if(cName) { %><%= order.products[i].quantity %><% }else{ %> <% } %>">
+								</td>
+							</tr>
+						<% } %>
+						
+					</tbody>
+				</table>
+			</div>
+		</div>
+		<div id="orderProductsNew">
+			<p for="products">Add Products: </p></br>
+			<div data-simplebar id="productList">
+				<table name= "table">
+					<thead>
+						<tr>
+							<th>Name</th>
+							<th>Price(&#8358)</th>
+							<th>PV</th>
+							<th>Quantity</th>
+						</tr>
+					</thead>
+					<tbody>
+						
+						<% sm = products.length%>
+						<% for(let i = 0; i < sm; i++){%>
+							<tr class="productRow">
+								<td>
+									<label for="products"><%= products[i].name%></label>
+									<input id="products" name="newProducts" value="<%=products[i].name%>" style="display: none;">
+								</td>
+								<td></td>
+								<td></td>
+								<td class="textDoubleCLick">
+									<input class="smallTableInput" type="" name="newQuantities" value="">
+								</td>
+							</tr>
+						<% } %>
+						
+					</tbody>
+				</table>
+			</div>
+		</div>
+	    <% if(locals.order && Object.keys(locals.order).length) { %>
+	        <input class="submit" id="submitOrder" type="submit" name="submit" value="Update Order">
+	    <% } else { %>
+	        <input class="submit" id="submitOrder" type="submit" name="submit" value="Create Order">
+	    <% } %>
+	</form>
+</div>
