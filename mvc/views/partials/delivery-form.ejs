@@ -1,4 +1,5 @@
 <div id="editForm">
+    <a href="javascript:history.back()" class="go-back"> <<<< Go Back </a>
 	<% if(locals.delivery && Object.keys(locals.delivery).length) { %>
 	    <form action="/sales/update-delivery/<%= delivery._id %>" method="post" autocomplete="off">
 	<% } else { %>

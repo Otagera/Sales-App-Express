@@ -16,6 +16,7 @@ const getCreateForm = ({ params }, res)=>{
 		defaultObj.title = 'Sales App- Create Delivery';
 		defaultObj.active = 'newDelivery'
 		defaultObj.products = products;
+		defaultObj.delivery = undefined;
 		res.render('create-delivery', defaultObj);
 	});
 }
