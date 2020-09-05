@@ -54,7 +54,7 @@
 										<td colspan="6">
 											<p>Products</p>
 											<ul>
-												<%for(let j = 0; j < orders[i].products.length; j++){%>
+												<%for(let j = 0; j < orders[i].products.length; j++){ %>
 													<li>
 														<span><%=orders[i].products[j].product.name%>:</span>
 														<span><%=orders[i].products[j].quantity%></span>

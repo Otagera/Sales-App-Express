@@ -95,7 +95,7 @@ const updateOrder = ({ params, body }, res) => {
 		if(body.products){
 			for(let i = 0; i < body.products.length; i++){
 				let qty = 0;
-				if(body.quantities[i] !== " " && body.newQuantities[i].length != 0){
+				if(body.quantities[i] !== " "){
 					qty = Number.parseInt(body.quantities[i]);
 				}
 				if(qty !== 0){
